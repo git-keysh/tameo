@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>More Than Designz · Custom Apparel TT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #020202;
+      font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      color: #e5e5e5;
+    }
+
+    @keyframes float3d {
+      0% { transform: translateY(0px) rotateX(0deg); }
+      50% { transform: translateY(-20px) rotateX(2deg); }
+      100% { transform: translateY(0px) rotateX(0deg); }
+    }
+
+    @keyframes slideInShred {
+      0% { opacity: 0; transform: skewX(15deg) translateX(-80px); }
+      100% { opacity: 1; transform: skewX(0deg) translateX(0); }
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes flickerIntense {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.94; }
+    }
+
+    .greek-text {
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    .ascii-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border: 12px solid #5e20ee;
+      z-index: 1000;
+      mix-blend-mode: overlay;
+      animation: flickerIntense 0.15s infinite;
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(94,32,238,0.03) 0px, rgba(94,32,238,0.03) 2px, transparent 2px, transparent 8px);
+      pointer-events: none;
+      z-index: 998;
+      animation: bgShift 8s linear infinite;
+    }
+
+    .header-panzer {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(2,2,2,0.88);
+      backdrop-filter: blur(18px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 36px;
+      border-bottom: 2px solid #5e20ee;
+      box-shadow: 0 8px 32px rgba(94,32,238,0.2);
+      animation: slideInShred 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #5e20ee;
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(125deg, #ffffff, #b77eff, #5e20ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      font-weight: 400;
+      color: #b77eff;
+      text-transform: uppercase;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 12px;
+      border: 1px solid #5e20ee;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #ddd;
+      font-family: 'Syne', monospace;
+      font-weight: 600;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .tab-btn.active {
+      background: #5e20ee;
+      color: #020202;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .currency-toggle {
+      background: rgba(94,32,238,0.2);
+      border: 1px solid #5e20ee;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-family: 'Syne', monospace;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.2s;
+    }
+    .currency-toggle:hover { background: #5e20ee; color: black; }
+
+    .cart-brutal {
+      background: rgba(94,32,238,0.15);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid #5e20ee;
+      padding: 10px 24px;
+      font-weight: 700;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Syne', monospace;
+    }
+
+    .hero-shatter {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    .video-pulse-bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      z-index: 0;
+      opacity: 0.95;
+    }
+
+    .video-pulse-bg video, .video-pulse-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-fore {
+      position: relative;
+      z-index: 15;
+      max-width: 1000px;
+      background: rgba(0,0,0,0.55);
+      padding: 64px 48px;
+      border-left: 8px solid #5e20ee;
+      border-bottom: 8px solid #5e20ee;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-fore h1 {
+      font-size: 5rem;
+      font-weight: 800;
+      font-family: 'Syne', sans-serif;
+      line-height: 1;
+    }
+    .hero-fore h1 span { color: #b77eff; font-family: 'Playfair Display', serif; font-style: italic; }
+    .hero-fore p { font-size: 1.3rem; margin: 28px 0; }
+    .cta-sharp {
+      background: none;
+      border: 2px solid #5e20ee;
+      padding: 16px 42px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Syne', monospace;
+    }
+    .cta-sharp:hover { background: #5e20ee; color: #020202; transform: translateY(-3px); }
+
+    .section-raw {
+      max-width: 1400px;
+      margin: 60px auto;
+      padding: 0 28px;
+    }
+
+    .section-title-grind {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      margin-bottom: 48px;
+      border-left: 12px solid #5e20ee;
+      padding-left: 28px;
+    }
+
+    .masonry-gutter {
+      column-count: 2;
+      column-gap: 32px;
+    }
+    @media (min-width: 780px) { .masonry-gutter { column-count: 3; } }
+    @media (min-width: 1100px) { .masonry-gutter { column-count: 4; } }
+
+    .product-brick {
+      break-inside: avoid;
+      margin-bottom: 32px;
+      background: #111;
+      border: 1px solid #2a2a2a;
+      transition: 0.35s;
+    }
+    .product-brick:hover { transform: translateY(-12px); border-color: #5e20ee; box-shadow: 0 20px 32px -12px rgba(94,32,238,0.4); }
+    .product-brick img { width: 100%; display: block; }
+    .brick-info { padding: 22px 20px 24px; }
+    .brick-info h3 { font-size: 1.4rem; font-weight: 700; font-family: 'Syne', sans-serif; }
+    .price-raw { font-size: 1.5rem; font-weight: 800; margin: 12px 0; color: #b77eff; }
+    .btn-order-savage {
+      width: 100%;
+      background: transparent;
+      border: 1.5px solid #5e20ee;
+      padding: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      font-family: monospace;
+      margin-top: 12px;
+    }
+    .btn-order-savage:hover { background: #5e20ee; color: black; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+    .service-card {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      padding: 32px 28px;
+      transition: 0.3s;
+    }
+    .service-card:hover { border-color: #5e20ee; transform: translateY(-6px); }
+    .service-card h3 { color: #b77eff; margin-bottom: 20px; font-size: 1.6rem; font-family: 'Playfair Display', serif; }
+    .service-card ul { list-style: none; }
+    .service-card li { padding: 10px 0; border-bottom: 1px solid #222; display: flex; justify-content: space-between; font-family: monospace; }
+
+    .price-list-large { background: #0a0a0a; padding: 32px; border-left: 6px solid #5e20ee; margin: 40px 0; }
+    .price-list-large ul { list-style: none; display: grid; gap: 16px; }
+    .price-list-large li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a2a2a; font-size: 1.1rem; }
+
+    .about-text { background: #0a0a0a; padding: 48px; border-left: 6px solid #5e20ee; margin: 40px 0; font-size: 1.1rem; line-height: 1.6; }
+    .contact-block { background: #0c0c0c; padding: 48px; text-align: center; border: 1px solid #5e20ee; margin: 40px 0; }
+    .contact-block a { color: #b77eff; text-decoration: none; }
+
+    .footer-underground {
+      background: #030303;
+      border-top: 3px solid #5e20ee;
+      margin-top: 80px;
+      padding: 48px 32px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+    .footer-underground .column img { max-width: 140px; margin-bottom: 16px; filter: drop-shadow(0 0 8px #5e20ee); }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 480px;
+      height: 100dvh;
+      background: #0c0c0c;
+      border-left: 4px solid #5e20ee;
+      z-index: 600;
+      transform: translateX(100%);
+      transition: transform 0.35s;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 24px;
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header-sharp { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.8rem; border-bottom: 2px solid #5e20ee; padding-bottom: 16px; margin-bottom: 24px; }
+    .cart-items-list { flex: 1; overflow-y: auto; }
+    .cart-item-unit { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid #2c2c2c; }
+    .cart-img-box { width: 70px; height: 70px; background-size: cover; background-position: center; border: 1px solid #5e20ee; }
+    .cart-total-row { display: flex; justify-content: space-between; font-size: 1.6rem; font-weight: 800; margin: 20px 0; }
+    .checkout-sharp { background: #5e20ee; border: none; width: 100%; padding: 20px; font-weight: 800; cursor: pointer; }
+    .overlay-dark { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(12px); z-index: 500; opacity: 0; pointer-events: none; transition: 0.25s; }
+    .overlay-dark.show { opacity: 1; pointer-events: auto; }
+    .hidden { display: none; }
+    .tab-content { display: none; animation: slideInShred 0.4s; }
+    .tab-content.active-tab { display: block; }
+    button { cursor: pointer; }
+    .currency-flag { font-size: 1.3rem; }
+  </style>
+</head>
+<body>
+<div class="ascii-frame"></div>
+<div class="scanline"></div>
+
+<header class="header-panzer">
+  <div class="logo-area">
+    <div class="logo-icon"><img src="assets/mascot.jpg" alt="mascot"></div>
+    <div class="brand-stack"><div class="brand-name greek-text">More Than Designz</div><div class="brand-sub">/// TRINIDAD & TOBAGO ///</div></div>
+  </div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="home">HOME</button>
+    <button class="tab-btn" data-tab="services">SERVICES</button>
+    <button class="tab-btn" data-tab="apparel">APPAREL</button>
+    <button class="tab-btn" data-tab="about">ABOUT</button>
+    <button class="tab-btn" data-tab="contact">CONTACT</button>
+  </div>
+  <div class="action-group">
+    <div class="currency-toggle" id="currencyToggleBtn">
+      <span id="currencySymbol">TTD</span>
+      <span id="flagIcon">🇹🇹</span>
+    </div>
+    <div class="cart-brutal" id="cartOpenBtn"><span>⛁ CART</span><span id="cartCountBadge" style="background:#5e20ee; padding:2px 10px;">0</span></div>
+  </div>
+</header>
+
+<div id="home-tab" class="tab-content active-tab">
+  <div class="hero-shatter">
+    <div class="video-pulse-bg"><img src="assets/386427f7tf7dfdsbfhesfe.png" alt="bg"><video src="assets/8b50f93208fab3eb80ba21eded1e2398_360w.mp4" autoplay loop muted playsinline></video><video src="assets/a936882c5e8900e503c0239f11f21ad1_240w.mp4" autoplay loop muted playsinline></video></div>
+    <div class="hero-fore"><h1>MORE THAN<br><span>DESIGNZ.</span><br>CULTURE WEAR</h1><p>Custom apparel • Screen Printing • DTG • Embroidery. Trinidad & Tobago national business.</p><button class="cta-sharp" id="heroShopBtn">⟁ SHOP COLLECTION ⟁</button></div>
+  </div>
+  <section class="section-raw"><div class="section-title-grind">⟐ FEATURED GARMENTS ⟐</div><div class="masonry-gutter" id="productGrid"></div></section>
+</div>
+
+<div id="services-tab" class="tab-content">
+  <section class="section-raw"><div class="section-title-grind">⟐ CUSTOM APPAREL & PRINT SERVICES ⟐</div>
+    <div class="services-grid">
+      <div class="service-card"><h3>✧ SCREEN PRINTING</h3><ul><li><span>Single Color (per shirt)</span><span class="service-price" data-ttd="45">TTD 45.00</span></li><li><span>2-3 Colors</span><span class="service-price" data-ttd="65">TTD 65.00</span></li><li><span>4+ Colors</span><span class="service-price" data-ttd="90">TTD 90.00</span></li><li><span>Setup Fee (per design)</span><span class="service-price" data-ttd="120">TTD 120.00</span></li></ul></div>
+      <div class="service-card"><h3>✧ DTG / DIRECT TO GARMENT</h3><ul><li><span>Full Color Print (front)</span><span class="service-price" data-ttd="75">TTD 75.00</span></li><li><span>Back Print</span><span class="service-price" data-ttd="65">TTD 65.00</span></li><li><span>Sleeve Print</span><span class="service-price" data-ttd="40">TTD 40.00</span></li><li><span>All-over Print (custom)</span><span class="service-price" data-ttd="150">TTD 150.00</span></li></ul></div>
+      <div class="service-card"><h3>✧ EMBROIDERY</h3><ul><li><span>Chest Logo (per piece)</span><span class="service-price" data-ttd="55">TTD 55.00</span></li><li><span>Cap Embroidery</span><span class="service-price" data-ttd="45">TTD 45.00</span></li><li><span>Large Back Design</span><span class="service-price" data-ttd="110">TTD 110.00</span></li><li><span>Digitizing Fee</span><span class="service-price" data-ttd="80">TTD 80.00</span></li></ul></div>
+      <div class="service-card"><h3>✧ CUSTOM DESIGN & MOCKUP</h3><ul><li><span>Graphic Design (per hour)</span><span class="service-price" data-ttd="90">TTD 90.00</span></li><li><span>Full Package (logo+art)</span><span class="service-price" data-ttd="350">TTD 350.00</span></li><li><span>Rush Order (+50%)</span><span class="service-price" data-ttd="0">Quote</span></li></ul></div>
+    </div>
+    <div class="price-list-large"><strong style="font-size:1.3rem;">✦ BULK & WHOLESALE PRICING ✦</strong><br><br><ul><li><span>50+ pieces T-shirt print</span><span class="bulk-ttd" data-ttd="22">TTD 22.00/pc</span></li><li><span>100+ pieces hoodie print</span><span class="bulk-ttd" data-ttd="65">TTD 65.00/pc</span></li><li><span>Custom Stickers (50 units)</span><span class="bulk-ttd" data-ttd="180">TTD 180.00</span></li></ul></div>
+  </section>
+</div>
+
+<div id="apparel-tab" class="tab-content">
+  <section class="section-raw"><div class="section-title-grind">⟐ APPAREL PRICING (BLANK + PRINT) ⟐</div>
+    <div class="price-list-large"><ul><li><span>Hoodie M (blank + print)</span><span class="apparel-price" data-ttd="220">TTD 220.00+</span></li><li><span>Women’s Cut Tee</span><span class="apparel-price" data-ttd="110">TTD 110.00+</span></li><li><span>Men’s Cut Tee</span><span class="apparel-price" data-ttd="85">TTD 85.00+</span></li><li><span>Children’s Cut</span><span class="apparel-price" data-ttd="65">TTD 65.00+</span></li><li><span>Custom Design Apparel (all-over)</span><span class="apparel-price" data-ttd="250">TTD 250.00+</span></li><li><span>Custom Stickers (pack of 10)</span><span class="apparel-price" data-ttd="45">TTD 45.00</span></li><li><span>Full Face Custom Graphic Tee</span><span class="apparel-price" data-ttd="130">TTD 130.00+</span></li></ul></div>
+  </section>
+</div>
+
+<div id="about-tab" class="tab-content">
+  <section class="section-raw"><div class="section-title-grind">⟐ ABOUT MORE THAN DESIGNZ ⟐</div>
+    <div class="about-text"><p>Based in Trinidad and Tobago, More Than Designz is a national creative powerhouse specializing in custom apparel, screen printing, DTG, embroidery, and streetwear manufacturing. We fuse raw Caribbean aesthetic with global print techniques. Our mission: deliver wearable art, durable prints, and expressive designs for brands, artists, and individuals. We operate with a no-compromise attitude — every shirt, hoodie, or sticker carries our signature energy. Let’s print beyond the limits.</p><br><p>📍 Trinidad & Tobago | National Business License<br>📞 (868) 781-8410 | ✉️ orders@morethantt.com</p></div>
+  </section>
+</div>
+
+<div id="contact-tab" class="tab-content">
+  <section class="section-raw"><div class="section-title-grind">⟐ CONTACT / ORDER ⟐</div>
+    <div class="contact-block"><h3 style="margin-bottom:20px;">✧ GET YOUR DESIGNS MADE ✧</h3><p><strong>Phone / WhatsApp:</strong> <a href="tel:18687818410">(868) 781-8410</a></p><p><strong>Email:</strong> <a href="mailto:orders@morethantt.com">orders@morethantt.com</a></p><p><strong>Studio:</strong> Trinidad and Tobago (by appointment)</p><p>For custom apparel quotes, bulk printing, stickers — reach out now.</p><button class="cta-sharp" id="fakeOrderBtn" style="margin-top:30px;">⟁ ORDER FROM US ⟁</button></div>
+  </section>
+</div>
+
+<footer class="footer-underground">
+  <div class="column"><img src="assets/morethandesignz.png" alt="logo"><p>EST. 2025 · MORE THAN DESIGNZ</p><p>TRINIDAD & TOBAGO</p></div>
+  <div class="column"><p style="font-weight:800;">⟁ CONTACT</p><p>orders@morethantt.com</p><p>+1 (868) 781-8410</p></div>
+  <div class="column"><p style="font-weight:800;">⟁ NATIONAL BUSINESS</p><p>Custom Apparel • Screen Print • DTG</p></div>
+</footer>
+
+<div class="cart-drawer" id="cartDrawer"><div class="cart-header-sharp"><span>⚡ CART ⚡</span><button id="closeCartBtn" style="background:none; border:none; color:#b77eff; font-size:2rem;">✕</button></div><div class="cart-items-list" id="cartItemsList"></div><div class="cart-total-row"><span>TOTAL</span><span id="cartFinalTotal">$0.00</span></div><button class="checkout-sharp" id="checkoutFinalBtn">⟁ CHECKOUT (DEMO) ⟁</button></div>
+<div class="overlay-dark" id="globalOverlay"></div>
+
+<script>
+  (function(){
+    const EXCHANGE_RATE = 6.80;
+    let currencyMode = "TTD";
+    const productsRaw = [
+      { id: "mt1", name: "HEATHER SHADOW", priceTTD: 425.00, priceUSD: 62.50, image: "https://liondtf.com/cdn/shop/files/Heather-Grey-T-Shirt.jpg?v=1698021997" },
+      { id: "mt2", name: "ETHNIC FRACTURE", priceTTD: 482.80, priceUSD: 71.00, image: "https://lovecraftgift.com/cdn/shop/files/Casual_ethnic_print_t-shirt.jpg?v=1747388882&width=1200" },
+      { id: "mt3", name: "CUSTOM BLEED", priceTTD: 333.13, priceUSD: 48.99, image: "https://d1x3eomzsc6lfz.cloudfront.net/apprintab/images/contentimages/images/personalised-T-shirt-printing.jpg?v=5634" },
+      { id: "mt4", name: "DUO REALM", priceTTD: 543.93, priceUSD: 79.99, image: "https://gogirgit.com/cdn/shop/files/print-on-back-couple-tshirts_1800x.jpg?v=1704220929" },
+      { id: "mt5", name: "STATEMENT NOISE", priceTTD: 450.50, priceUSD: 66.25, image: "https://ucsdguardian.org/wp-content/uploads/2025/05/Michael-Ho-Charlie-Kirk1-1200x800.jpg" },
+      { id: "mt6", name: "PSYCHIC GARMENT", priceTTD: 373.93, priceUSD: 54.99, image: "https://printify.com/wp-content/uploads/2023/10/Unisex-Garment-Dyed-T-Shirt-with-design.jpg" }
+    ];
+    let cartItems = [];
+
+    function getCurrentPrice(product) { return currencyMode === "TTD" ? product.priceTTD : product.priceUSD; }
+    function formatPrice(amount) { return currencyMode === "TTD" ? `TTD ${amount.toFixed(2)}` : `$${amount.toFixed(2)} USD`; }
+    function updateAllPrices() {
+      document.querySelectorAll('.product-brick').forEach(brick => {
+        const pid = brick.dataset.prodId;
+        const prod = productsRaw.find(p => p.id === pid);
+        if(prod) { const priceSpan = brick.querySelector('.price-value-span'); if(priceSpan) priceSpan.innerText = currencyMode === "TTD" ? `TTD ${prod.priceTTD.toFixed(2)}` : `$${prod.priceUSD.toFixed(2)} USD`; }
+      });
+      document.querySelectorAll('.service-price, .bulk-ttd, .apparel-price').forEach(el => {
+        const ttdVal = parseFloat(el.dataset.ttd);
+        if(!isNaN(ttdVal)) { const usdVal = ttdVal / EXCHANGE_RATE; el.innerText = currencyMode === "TTD" ? `TTD ${ttdVal.toFixed(2)}` : `$${usdVal.toFixed(2)} USD`; }
+      });
+      const symbolSpan = document.getElementById('currencySymbol');
+      const flagSpan = document.getElementById('flagIcon');
+      if(currencyMode === "TTD") { symbolSpan.innerText = "TTD"; flagSpan.innerText = "🇹🇹"; } else { symbolSpan.innerText = "USD"; flagSpan.innerText = "🇺🇸"; }
+      renderCartDrawer();
+    }
+
+    function toggleCurrency() { currencyMode = currencyMode === "TTD" ? "USD" : "TTD"; updateAllPrices(); }
+
+    function saveCartAndRender() { const totalQty = cartItems.reduce((acc, i) => acc + i.qty, 0); document.getElementById('cartCountBadge').innerText = totalQty; renderCartDrawer(); }
+    function addProductToCart(product, qty = 1) { const existing = cartItems.find(i => i.id === product.id); if(existing) existing.qty += qty; else cartItems.push({ id: product.id, name: product.name, priceTTD: product.priceTTD, priceUSD: product.priceUSD, image: product.image, qty: qty }); saveCartAndRender(); showBrutalToast(`⚡ ${product.name} ADDED ⚡`); }
+    function updateCartItemQuantity(id, delta) { const target = cartItems.find(i => i.id === id); if(target) { target.qty += delta; if(target.qty <= 0) cartItems = cartItems.filter(i => i.id !== id); saveCartAndRender(); } }
+    function removeCartItemComplete(id) { cartItems = cartItems.filter(i => i.id !== id); saveCartAndRender(); }
+    function renderCartDrawer() {
+      const container = document.getElementById('cartItemsList'); const totalSpan = document.getElementById('cartFinalTotal');
+      if(!container) return;
+      if(cartItems.length === 0) { container.innerHTML = `<div style="padding: 40px; text-align:center;">⚡ EMPTY ⚡</div>`; totalSpan.innerText = currencyMode === "TTD" ? "TTD 0.00" : "$0.00 USD"; return; }
+      let total = 0; let html = '';
+      cartItems.forEach(item => { const itemPrice = currencyMode === "TTD" ? item.priceTTD : item.priceUSD; const itemTotal = itemPrice * item.qty; total += itemTotal;
+        html += `<div class="cart-item-unit" data-id="${item.id}"><div class="cart-img-box" style="background-image: url('${item.image}');"></div><div style="flex:1;"><div style="font-weight:800;">${item.name}</div><div>${currencyMode === "TTD" ? `TTD ${itemPrice.toFixed(2)}` : `$${itemPrice.toFixed(2)} USD`}</div><div style="display:flex; gap:12px; margin-top:8px;"><button class="cart-qty-dec" style="background:#222; border:none; padding:4px 12px;">−</button><span>${item.qty}</span><button class="cart-qty-inc" style="background:#222; border:none; padding:4px 12px;">+</button><button class="cart-remove-item" style="background:#5e20ee30; border:none; padding:4px 12px;">REMOVE</button></div></div></div>`;
+      });
+      container.innerHTML = html; totalSpan.innerText = currencyMode === "TTD" ? `TTD ${total.toFixed(2)}` : `$${total.toFixed(2)} USD`;
+      document.querySelectorAll('.cart-item-unit').forEach(el => { const id = el.dataset.id; el.querySelector('.cart-qty-dec')?.addEventListener('click',()=>updateCartItemQuantity(id,-1)); el.querySelector('.cart-qty-inc')?.addEventListener('click',()=>updateCartItemQuantity(id,1)); el.querySelector('.cart-remove-item')?.addEventListener('click',()=>removeCartItemComplete(id)); });
+    }
+    function showBrutalToast(msg) { const t=document.createElement('div'); t.innerText=msg; t.style.cssText='position:fixed; bottom:30px; left:30px; background:#000; border-left:6px solid #5e20ee; padding:14px 26px; font-family:monospace; z-index:3000; color:#ddccff; backdrop-filter:blur(16px);'; document.body.appendChild(t); setTimeout(()=>t.remove(),1800); }
+    function renderProductGrid() {
+      const grid = document.getElementById('productGrid'); if(!grid) return;
+      let html = '';
+      productsRaw.forEach(prod => { const priceDisplay = currencyMode === "TTD" ? `TTD ${prod.priceTTD.toFixed(2)}` : `$${prod.priceUSD.toFixed(2)} USD`;
+        html += `<div class="product-brick" data-prod-id="${prod.id}"><div class="image-container"><img src="${prod.image}" loading="lazy"></div><div class="brick-info"><h3>${prod.name}</h3><div class="price-raw price-value-span">${priceDisplay}</div><button class="btn-order-savage add-to-cart-btn">⟁ ADD TO CART ⟁</button></div></div>`;
+      });
+      grid.innerHTML = html;
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => { const brick = btn.closest('.product-brick'); const pid = brick.dataset.prodId; const product = productsRaw.find(p => p.id === pid); btn.addEventListener('click', (e) => { e.stopPropagation(); addProductToCart(product, 1); }); });
+    }
+    const cartDrawer=document.getElementById('cartDrawer'), overlay=document.getElementById('globalOverlay');
+    function openCart(){ cartDrawer.classList.add('open'); overlay.classList.add('show'); document.body.style.overflow='hidden'; }
+    function closeCart(){ cartDrawer.classList.remove('open'); overlay.classList.remove('show'); document.body.style.overflow=''; }
+    document.getElementById('cartOpenBtn')?.addEventListener('click',openCart);
+    document.getElementById('closeCartBtn')?.addEventListener('click',closeCart);
+    overlay?.addEventListener('click',closeCart);
+    document.getElementById('checkoutFinalBtn')?.addEventListener('click',()=>{ if(cartItems.length===0){ showBrutalToast("EMPTY CART"); return; } alert(`DEMO CHECKOUT TOTAL: ${document.getElementById('cartFinalTotal').innerText}\nMORE THAN DESIGNZ - TRINIDAD`); });
+    document.getElementById('heroShopBtn')?.addEventListener('click',()=>{ document.querySelector('#home-tab .section-raw')?.scrollIntoView({behavior:'smooth'}); });
+    document.getElementById('fakeOrderBtn')?.addEventListener('click',()=>{ showBrutalToast("📞 CALL (868) 781-8410 OR EMAIL orders@morethantt.com"); });
+    document.getElementById('currencyToggleBtn')?.addEventListener('click', toggleCurrency);
+    document.querySelectorAll('.tab-btn').forEach(btn=>{ btn.addEventListener('click',()=>{ const tabId=btn.dataset.tab; document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active-tab')); document.getElementById(`${tabId}-tab`).classList.add('active-tab'); document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); if(tabId==='home') renderProductGrid(); window.scrollTo({top:0,behavior:'smooth'}); }); });
+    renderProductGrid(); saveCartAndRender(); updateAllPrices();
+    document.querySelectorAll('video').forEach(v=>{ v.play().catch(e=>{}); });
+  })();
+</script>
+</body>
+</html>

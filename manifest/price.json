@@ -1,0 +1,41 @@
+{
+  "apparel_products": [
+    { "id": "mt1", "name": "HEATHER SHADOW", "priceTTD": 425.00, "priceUSD": 62.50, "image": "https://liondtf.com/cdn/shop/files/Heather-Grey-T-Shirt.jpg?v=1698021997" },
+    { "id": "mt2", "name": "ETHNIC FRACTURE", "priceTTD": 482.80, "priceUSD": 71.00, "image": "https://lovecraftgift.com/cdn/shop/files/Casual_ethnic_print_t-shirt.jpg?v=1747388882&width=1200" },
+    { "id": "mt3", "name": "CUSTOM BLEED", "priceTTD": 333.13, "priceUSD": 48.99, "image": "https://d1x3eomzsc6lfz.cloudfront.net/apprintab/images/contentimages/images/personalised-T-shirt-printing.jpg?v=5634" },
+    { "id": "mt4", "name": "DUO REALM", "priceTTD": 543.93, "priceUSD": 79.99, "image": "https://gogirgit.com/cdn/shop/files/print-on-back-couple-tshirts_1800x.jpg?v=1704220929" },
+    { "id": "mt5", "name": "STATEMENT NOISE", "priceTTD": 450.50, "priceUSD": 66.25, "image": "https://ucsdguardian.org/wp-content/uploads/2025/05/Michael-Ho-Charlie-Kirk1-1200x800.jpg" },
+    { "id": "mt6", "name": "PSYCHIC GARMENT", "priceTTD": 373.93, "priceUSD": 54.99, "image": "https://printify.com/wp-content/uploads/2023/10/Unisex-Garment-Dyed-T-Shirt-with-design.jpg" }
+  ],
+  "screen_printing": [
+    { "service": "Single Color (per shirt)", "priceTTD": 45.00, "priceUSD": 6.62 },
+    { "service": "2-3 Colors", "priceTTD": 65.00, "priceUSD": 9.56 },
+    { "service": "4+ Colors", "priceTTD": 90.00, "priceUSD": 13.24 },
+    { "service": "Setup Fee (per design)", "priceTTD": 120.00, "priceUSD": 17.65 }
+  ],
+  "dtg_printing": [
+    { "service": "Full Color Print (front)", "priceTTD": 75.00, "priceUSD": 11.03 },
+    { "service": "Back Print", "priceTTD": 65.00, "priceUSD": 9.56 },
+    { "service": "Sleeve Print", "priceTTD": 40.00, "priceUSD": 5.88 },
+    { "service": "All-over Print (custom)", "priceTTD": 150.00, "priceUSD": 22.06 }
+  ],
+  "custom_design_mockup": [
+    { "service": "Graphic Design (per hour)", "priceTTD": 90.00, "priceUSD": 13.24 },
+    { "service": "Full Package (logo+art)", "priceTTD": 350.00, "priceUSD": 51.47 },
+    { "service": "Rush Order (+50%)", "priceTTD": "Quote", "priceUSD": "Quote" }
+  ],
+  "bulk_wholesale": [
+    { "item": "50+ pieces T-shirt print", "priceTTD": 22.00, "priceUSD": 3.24, "unit": "per piece" },
+    { "item": "100+ pieces hoodie print", "priceTTD": 65.00, "priceUSD": 9.56, "unit": "per piece" },
+    { "item": "Custom Stickers (50 units)", "priceTTD": 180.00, "priceUSD": 26.47, "unit": "per pack" }
+  ],
+  "apparel_blanks": [
+    { "item": "Hoodie M (blank + print)", "priceTTD": 220.00, "priceUSD": 32.35 },
+    { "item": "Women's Cut Tee", "priceTTD": 110.00, "priceUSD": 16.18 },
+    { "item": "Men's Cut Tee", "priceTTD": 85.00, "priceUSD": 12.50 },
+    { "item": "Children's Cut", "priceTTD": 65.00, "priceUSD": 9.56 },
+    { "item": "Custom Design Apparel (all-over)", "priceTTD": 250.00, "priceUSD": 36.76 },
+    { "item": "Custom Stickers (pack of 10)", "priceTTD": 45.00, "priceUSD": 6.62 },
+    { "item": "Full Face Custom Graphic Tee", "priceTTD": 130.00, "priceUSD": 19.12 }
+  ]
+}
